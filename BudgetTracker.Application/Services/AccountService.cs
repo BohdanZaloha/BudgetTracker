@@ -19,6 +19,9 @@ namespace BudgetTracker.Application.Services
             _validator = validator;
             _logger = logger;
         }
+        /// <summary>
+        /// Creates a new account for <paramref name="userId"/>.
+        /// </summary>
         public async Task<AccountDto> CreateAsync(string userId, CreateAccountRequestDto requestDto, CancellationToken token)
         {
             using var scope = _logger.BeginScope(new {AccountName = requestDto.Name });
@@ -54,6 +57,9 @@ namespace BudgetTracker.Application.Services
 
         }
 
+        /// <summary>
+        /// Lists all non-archived accounts for <paramref name="userId"/>.
+        /// </summary>
         public async Task<IReadOnlyList<AccountDto>> GetAllAsync(string userId, CancellationToken token)
         {
             _logger.LogInformation("Listing accounts");

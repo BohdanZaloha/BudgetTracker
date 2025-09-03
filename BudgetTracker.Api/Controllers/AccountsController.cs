@@ -17,6 +17,10 @@ namespace BudgetTracker.Api.Controllers
         {
             _accountService = accountService;
         }
+
+        /// <summary>
+        /// Gets all accounts for the current user.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<AccountDto>>> GetAll(CancellationToken token)
         {
@@ -24,6 +28,9 @@ namespace BudgetTracker.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Creates a new account for the current user.
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<AccountDto>> Create([FromBody] CreateAccountRequestDto createDto, CancellationToken token)
         {

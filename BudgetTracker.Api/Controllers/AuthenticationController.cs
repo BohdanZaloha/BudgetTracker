@@ -19,6 +19,9 @@ namespace BudgetTracker.Api.Controllers
             _auth = auth;
         }
 
+        /// <summary>
+        /// Registers a new user.
+        /// </summary>
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<AuthentificationResult>> Register([FromBody] RegisterUserCommand cmd, CancellationToken token)
@@ -27,6 +30,9 @@ namespace BudgetTracker.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Authenticates a user.
+        /// </summary>
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<AuthentificationResult>> Login([FromBody] LoginUserCommand cmd, CancellationToken token)
@@ -35,6 +41,9 @@ namespace BudgetTracker.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Returns basic information about the current authenticated user.
+        /// </summary>
         [Authorize]
         [HttpGet("me")]
         public IActionResult Me()

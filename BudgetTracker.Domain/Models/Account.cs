@@ -7,7 +7,6 @@ namespace BudgetTracker.Domain.Models
     {
         [Key]
         public Guid Guid { get; set; }
-        [Required]
         public string UserId { get; set; } = default!;
         public ApplicationUser User { get; set; } = default!;
 

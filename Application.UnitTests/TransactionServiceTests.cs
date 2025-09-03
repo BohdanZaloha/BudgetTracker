@@ -3,6 +3,7 @@ using BudgetTracker.Application.Dtos;
 using BudgetTracker.Application.DTOS;
 using BudgetTracker.Application.Services;
 using BudgetTracker.Application.Validation;
+using BudgetTracker.Domain.Enumerables;
 using BudgetTracker.Domain.Models;
 using FluentAssertions;
 using FluentValidation;

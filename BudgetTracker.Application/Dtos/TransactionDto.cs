@@ -1,4 +1,5 @@
 ﻿using BudgetTracker.Domain.Models;
+using BudgetTracker.Domain.Enumerables;
 
 namespace BudgetTracker.Application.DTOS
 {

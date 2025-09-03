@@ -61,8 +61,7 @@ namespace BudgetTracker.Api
 
             app.Use(async (ctx, next) =>
             {
-                var userId = ctx.User?.FindFirst("sub")?.Value
-                          ?? ctx.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                var userId = ctx.User?.FindFirst("sub")?.Value ?? ctx.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
                 using (LogContext.PushProperty("TraceId", ctx.TraceIdentifier))
                 using (LogContext.PushProperty("UserId", userId ?? "anonymous"))

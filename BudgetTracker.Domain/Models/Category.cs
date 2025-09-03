@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BudgetTracker.Domain.Enumerables;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BudgetTracker.Domain.Models
@@ -13,12 +14,12 @@ namespace BudgetTracker.Domain.Models
         public ApplicationUser User { get; set; } = default!;
 
         [Required, MaxLength(120)]
-        public string Name { get; set; } = default!;         // унікальне в межах (UserId, Type)
+        public string Name { get; set; } = default!;
 
         [Required]
-        public CategoryType Type { get; set; }               // 0=Expense, 1=Income
+        public CategoryType Type { get; set; } // 0=Expense, 1=Income
 
-        public Guid? ParentId { get; set; }                  // self-FK
+        public Guid? ParentId { get; set; } 
         public Category? Parent { get; set; }
         public ICollection<Category> Children { get; set; } = new List<Category>();
 

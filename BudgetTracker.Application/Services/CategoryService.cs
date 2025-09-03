@@ -18,6 +18,9 @@ namespace BudgetTracker.Application.Services
             _validator = validator;
             _logger = logger;
         }
+        /// <summary>
+        /// Creates a new category for <paramref name="userId"/>.
+        /// </summary>
         public async Task<CategoryDto> CreateAsync(string userId, CreateCategoryRequestDto requestDto, CancellationToken token)
         {
 
@@ -58,6 +61,9 @@ namespace BudgetTracker.Application.Services
             };
         }
 
+        /// <summary>
+        /// Lists all non-archived categories for <paramref name="userId"/>.
+        /// </summary>
         public async Task<IReadOnlyList<CategoryDto>> GetAllAsync(string userId, CancellationToken token)
         {
             _logger.LogInformation("Listing categories");

@@ -18,6 +18,10 @@ namespace BudgetTracker.Infrastructure.Authentification
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Key));
             _credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         }
+
+        /// <summary>
+        /// Generates a JWT access token.
+        /// </summary>
         public string GenerateToken(string userId, string userName, string? email, IEnumerable<string> roles, IEnumerable<Claim>? extraClaims = null, DateTime? nowUtc = null)
         {
             var now = nowUtc ?? DateTime.UtcNow;

@@ -2,6 +2,7 @@
 using BudgetTracker.Application.Common;
 using BudgetTracker.Application.Dtos;
 using BudgetTracker.Application.DTOS;
+using BudgetTracker.Domain.Enumerables;
 using BudgetTracker.Domain.Models;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,10 @@ namespace BudgetTracker.Application.Services
             _repository = repository;
             _logger = logger;
         }
+
+        /// <summary>
+        /// Creates a new transaction for <paramref name="userId"/>.
+        /// </summary>
         public async Task<TransactionDto> CreateAsync(string userId, CreateTransactionRequestDto requestDto, CancellationToken token)
         {
             using var scope = _logger.BeginScope(new {AccountId = requestDto.AccountId });
@@ -40,7 +45,7 @@ namespace BudgetTracker.Application.Services
             var currency = requestDto.Currency.ToUpperInvariant();
             if (currency != accountExists.Currency)
             {
-                throw new ValidationException("Currency does not match the account currency"); //????
+                throw new ValidationException("Currency does not match the account currency");
             }
 
             Category? category = null;
@@ -91,8 +96,9 @@ namespace BudgetTracker.Application.Services
             };
         }
 
-
-
+        /// <summary>
+        /// Queries transactions with paging and optional filters.
+        /// </summary>
         public async Task<PagedResult<TransactionDto>> QueryAsync(string userId, TransactionQuery query, CancellationToken token)
         {
 

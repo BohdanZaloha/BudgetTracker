@@ -24,6 +24,9 @@ namespace BudgetTracker.Application.Services
             _accessMinutes = jwtOptions.Value.AccessTokenMinutes;
             _logger = logger;
         }
+        /// <summary>
+        /// Validates credentials and issues a JWT.
+        /// </summary>
         public async Task<AuthentificationResult> LoginAsync(LoginUserCommand cmd, CancellationToken token)
         {
             _logger.LogInformation("Login attempt for {Email}", cmd.Email);
@@ -47,6 +50,9 @@ namespace BudgetTracker.Application.Services
             };
         }
 
+        /// <summary>
+        /// Creates a new user account and issues a JWT.
+        /// </summary>
         public async Task<AuthentificationResult> RegisterAsync(RegisterUserCommand cmd, CancellationToken token)
         {
             _logger.LogInformation("Register attempt for {Email}", cmd.Email);

@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BudgetTracker.Api.MiddleWare
 {
+    // <summary>
+    /// Centralized exception handler that converts exceptions to RFC 7807 <see cref="ProblemDetails"/>.
+    /// </summary>
     public class GlobalExceptionHandler : IExceptionHandler
     {
         private readonly IProblemDetailsService _problemDetailsService;
@@ -18,6 +21,9 @@ namespace BudgetTracker.Api.MiddleWare
             _logger = logger;
             _environment = environment;
         }
+        /// <summary>
+        /// Attempts to handle an unhandled exception and write a <see cref="ProblemDetails"/> response.
+        /// </summary>
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
             if (exception is OperationCanceledException && httpContext.RequestAborted.IsCancellationRequested)
@@ -54,7 +60,7 @@ namespace BudgetTracker.Api.MiddleWare
                 _logger.LogWarning("{Title} {Path} → {Status} ({TraceId}) | {Message}", title, httpContext.Request.Path, status, traceId, exception.Message);
 
             httpContext.Response.StatusCode = status;
-            // Leverage content negotiation (ProblemDetailsService handles JSON/XML/etc.)
+
             return await _problemDetailsService.TryWriteAsync(new ProblemDetailsContext
             {
                 HttpContext = httpContext,
@@ -62,6 +68,9 @@ namespace BudgetTracker.Api.MiddleWare
             });
         }
 
+        /// <summary>
+        /// Maps known exceptions to HTTP status/title/code tuple.
+        /// </summary>
         private static (int status, string title, string code) Map(Exception exception)
         {
             if (exception is UnauthorizedAccessException)
@@ -94,6 +103,9 @@ namespace BudgetTracker.Api.MiddleWare
             }
             return (500, "Internal Server Error", "common.unhandled");
         }
+        /// <summary>
+        /// Determines whether exception details should be shown in the response.
+        /// </summary>
         private bool ShouldShowDetail(Exception ex, int status)
        => _environment.IsDevelopment() || status is >= 400 and < 500;
     }

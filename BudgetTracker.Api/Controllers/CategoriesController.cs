@@ -17,6 +17,10 @@ namespace BudgetTracker.Api.Controllers
         {
             _categoryService = categoryService;
         }
+
+        /// <summary>
+        /// Gets all categories for the current user.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<CategoryDto>>> GetAll(CancellationToken token)
         {
@@ -24,6 +28,9 @@ namespace BudgetTracker.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Creates a new category for the current user.
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<CategoryDto>> Create([FromBody] CreateCategoryRequestDto createDto, CancellationToken token)
         {

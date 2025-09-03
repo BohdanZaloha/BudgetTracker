@@ -21,17 +21,18 @@ namespace BudgetTracker.Api.Controllers
         }
         [HttpGet]
 
+        /// <summary>
+        /// Queries transactions with paging and filters.
+        /// </summary>
         public async Task<ActionResult<PagedResult<TransactionDto>>> Query([FromQuery] TransactionQuery query, CancellationToken token)
         {
             var response = await _transactionService.QueryAsync(User.GetUserId(), query, token);
             return Ok(response);
         }
-        //public async Task<ActionResult<IReadOnlyList<TransactionDto>>> GetAll(CancellationToken token)
-        //{
-        //    var response = await _transactionService.GetAllAsync(User.GetUserId(), token);
-        //    return Ok(response);
-        //}
 
+        /// <summary>
+        /// Creates a new transaction.
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<TransactionDto>> Create([FromBody] CreateTransactionRequestDto createDto, CancellationToken token)
         {

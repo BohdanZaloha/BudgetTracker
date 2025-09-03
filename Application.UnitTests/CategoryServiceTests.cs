@@ -2,6 +2,7 @@
 using BudgetTracker.Application.DTOS;
 using BudgetTracker.Application.Services;
 using BudgetTracker.Application.Validation;
+using BudgetTracker.Domain.Enumerables;
 using BudgetTracker.Domain.Models;
 using FluentAssertions;
 using FluentValidation;
@@ -100,6 +101,27 @@ namespace Application.UnitTests
                 (CategoryType.Expense, "B"),
                 (CategoryType.Income, "A")
             );
+        }
+        [Fact]
+        public async Task CreateAsync_parent_belongs_to_other_user_throws_not_found()
+        {
+            using var ctx = TestRepositoryContext.CreateInMemory();
+            var parentOfOtherUser = TestData.Category("other", "Parent", CategoryType.Expense);
+            ctx.Categories.Add(parentOfOtherUser);
+            await ctx.SaveChangesAsync();
+
+            var sut = new CategoryService(ctx, new CreateCategoryRequestValidator(), TestData.NullLog<CategoryService>());
+            var req = new CreateCategoryRequestDto 
+            {
+                Name = "Child",
+                Type = CategoryType.Expense,
+                ParentId = parentOfOtherUser.Id
+            };
+
+            var act = () => sut.CreateAsync("u1", req, CancellationToken.None);
+
+            await act.Should().ThrowAsync<KeyNotFoundException>()
+                     .WithMessage("*ParentCategoryNotFound*");
         }
     }
 }

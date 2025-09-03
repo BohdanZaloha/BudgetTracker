@@ -30,7 +30,6 @@ namespace BudgetTracker.Infrastructure.Configurations
 
             b.HasOne(x => x.Category).WithMany(c => c.Transactions).HasForeignKey(x => x.CategoryId).OnDelete(DeleteBehavior.SetNull);
 
-            // Check constraints (SQL Server)
             b.ToTable(t =>
             {
                 t.HasCheckConstraint("CK_Transactions_Type", "[Type] IN (0,1)");

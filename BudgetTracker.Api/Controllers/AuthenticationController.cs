@@ -50,7 +50,7 @@ namespace BudgetTracker.Api.Controllers
         {
             return Ok(new
             {
-                userId = User.FindFirstValue(ClaimTypes.NameIdentifier)?? User.FindFirstValue(JwtRegisteredClaimNames.Sub),
+                userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue(JwtRegisteredClaimNames.Sub),
                 name = User.FindFirstValue(ClaimTypes.Name) ?? User.Identity?.Name,
                 email = User.FindFirstValue(ClaimTypes.Email) ?? User.FindFirstValue(JwtRegisteredClaimNames.Email),
                 roles = User.Claims.Where(c => c.Type == ClaimTypes.Role || c.Type.EndsWith("/role")).Select(c => c.Value)

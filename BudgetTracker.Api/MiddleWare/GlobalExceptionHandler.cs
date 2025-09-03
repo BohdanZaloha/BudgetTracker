@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using System.Diagnostics;
-using FluentValidation;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace BudgetTracker.Api.MiddleWare
 {
@@ -33,7 +33,7 @@ namespace BudgetTracker.Api.MiddleWare
             }
 
             var (status, title, code) = Map(exception);
-            
+
             var traceId = Activity.Current?.Id ?? httpContext.TraceIdentifier;
 
             var problem = new ProblemDetails
@@ -81,8 +81,8 @@ namespace BudgetTracker.Api.MiddleWare
             {
                 return (404, "Not Found", "common.not_found");
             }
-            if (exception is BadHttpRequestException) 
-                    {
+            if (exception is BadHttpRequestException)
+            {
                 return (400, "Bad Request", "http.bad_request");
             }
             if (exception is System.Text.Json.JsonException)
@@ -97,7 +97,7 @@ namespace BudgetTracker.Api.MiddleWare
             {
                 return (409, "Conflict", "db.conflict");
             }
-            if(exception is OperationCanceledException)
+            if (exception is OperationCanceledException)
             {
                 return (499, "Client Closed Request", "request.canceled");
             }

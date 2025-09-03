@@ -1,23 +1,11 @@
-﻿using Application.UnitTests.Testing;
-using BudgetTracker.Api.MiddleWare;
-using BudgetTracker.Application.Abstractions.Security;
-using BudgetTracker.Application.Dtos;
-using BudgetTracker.Application.DTOS;
-using BudgetTracker.Application.Services;
-using BudgetTracker.Application.Validation;
-using BudgetTracker.Infrastructure.Authentification;
-using BudgetTracker.Infrastructure.Identity;
+﻿using BudgetTracker.Api.MiddleWare;
 using FluentAssertions;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Moq;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace Application.UnitTests
 {

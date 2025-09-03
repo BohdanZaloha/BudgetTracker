@@ -1,13 +1,10 @@
 ﻿using Application.UnitTests.Testing;
 using BudgetTracker.Application.Abstractions.Security;
 using BudgetTracker.Application.Dtos;
-using BudgetTracker.Application.DTOS;
 using BudgetTracker.Application.Services;
-using BudgetTracker.Application.Validation;
 using BudgetTracker.Infrastructure.Identity;
 using FluentAssertions;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Moq;
 

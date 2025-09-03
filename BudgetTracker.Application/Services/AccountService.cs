@@ -4,7 +4,6 @@ using BudgetTracker.Domain.Models;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 
 namespace BudgetTracker.Application.Services
 {
@@ -24,7 +23,7 @@ namespace BudgetTracker.Application.Services
         /// </summary>
         public async Task<AccountDto> CreateAsync(string userId, CreateAccountRequestDto requestDto, CancellationToken token)
         {
-            using var scope = _logger.BeginScope(new {AccountName = requestDto.Name });
+            using var scope = _logger.BeginScope(new { AccountName = requestDto.Name });
 
             _logger.LogInformation("Creating account with currency {Currency}", requestDto.Currency);
             await _validator.ValidateAndThrowAsync(requestDto, token);

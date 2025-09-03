@@ -4,7 +4,6 @@ using BudgetTracker.Application.DTOS;
 using BudgetTracker.Application.Services;
 using BudgetTracker.Application.Validation;
 using BudgetTracker.Domain.Enumerables;
-using BudgetTracker.Domain.Models;
 using FluentAssertions;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +42,8 @@ namespace Application.UnitTests
             {
                 AccountId = acc.Guid,
                 Type = TransactionType.Expense,
-                Amount = 10, Currency = "USD" 
+                Amount = 10,
+                Currency = "USD"
             }, CancellationToken.None);
             await act.Should().ThrowAsync<ValidationException>().WithMessage("*Currency does not match*");
         }

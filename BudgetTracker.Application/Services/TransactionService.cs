@@ -29,7 +29,7 @@ namespace BudgetTracker.Application.Services
         /// </summary>
         public async Task<TransactionDto> CreateAsync(string userId, CreateTransactionRequestDto requestDto, CancellationToken token)
         {
-            using var scope = _logger.BeginScope(new {AccountId = requestDto.AccountId });
+            using var scope = _logger.BeginScope(new { AccountId = requestDto.AccountId });
 
             _logger.LogInformation("Creating transaction {Type} {Amount} {Currency}", requestDto.Type, requestDto.Amount, requestDto.Currency);
 

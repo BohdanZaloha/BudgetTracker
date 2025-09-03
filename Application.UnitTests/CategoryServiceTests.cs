@@ -3,10 +3,8 @@ using BudgetTracker.Application.DTOS;
 using BudgetTracker.Application.Services;
 using BudgetTracker.Application.Validation;
 using BudgetTracker.Domain.Enumerables;
-using BudgetTracker.Domain.Models;
 using FluentAssertions;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.UnitTests
 {
@@ -37,7 +35,7 @@ namespace Application.UnitTests
             await ctx.SaveChangesAsync();
 
             var sut = new CategoryService(ctx, new CreateCategoryRequestValidator(), TestData.NullLog<CategoryService>());
-            var req = new CreateCategoryRequestDto 
+            var req = new CreateCategoryRequestDto
             {
                 Name = "Groceries",
                 Type = CategoryType.Expense,
@@ -53,7 +51,7 @@ namespace Application.UnitTests
         {
             using var ctx = TestRepositoryContext.CreateInMemory();
             var sut = new CategoryService(ctx, new CreateCategoryRequestValidator(), TestData.NullLog<CategoryService>());
-            var req = new CreateCategoryRequestDto 
+            var req = new CreateCategoryRequestDto
             {
                 Name = "food",
                 Type = CategoryType.Expense,
@@ -74,7 +72,7 @@ namespace Application.UnitTests
 
             var sut = new CategoryService(ctx, new CreateCategoryRequestValidator(), TestData.NullLog<CategoryService>());
             var act = () => sut.CreateAsync("user1", new CreateCategoryRequestDto
-            { 
+            {
                 Name = "Groceries",
                 Type = CategoryType.Expense
             }, CancellationToken.None);
@@ -111,7 +109,7 @@ namespace Application.UnitTests
             await ctx.SaveChangesAsync();
 
             var sut = new CategoryService(ctx, new CreateCategoryRequestValidator(), TestData.NullLog<CategoryService>());
-            var req = new CreateCategoryRequestDto 
+            var req = new CreateCategoryRequestDto
             {
                 Name = "Child",
                 Type = CategoryType.Expense,

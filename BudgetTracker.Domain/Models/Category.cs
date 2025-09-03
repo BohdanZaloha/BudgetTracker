@@ -19,7 +19,7 @@ namespace BudgetTracker.Domain.Models
         [Required]
         public CategoryType Type { get; set; } // 0=Expense, 1=Income
 
-        public Guid? ParentId { get; set; } 
+        public Guid? ParentId { get; set; }
         public Category? Parent { get; set; }
         public ICollection<Category> Children { get; set; } = new List<Category>();
 

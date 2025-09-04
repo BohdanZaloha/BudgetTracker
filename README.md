@@ -10,7 +10,7 @@ A clean, test-covered ASP.NET Core API for tracking personal finances. Create ac
 - **Validation & Problem Details**: consistent errors via FluentValidation + RFC7807 responses
 - **Logging & Swagger**: Serilog JSON logs and built-in OpenAPI/Swagger
 
-## Architecture (onion-ish)
+## Architecture
 ```
 BudgetTracker.Domain         // Entities & enums
 BudgetTracker.Application    // DTOs, services, validators
@@ -43,12 +43,6 @@ Content-Type: application/json
   "roles": []
 }
 ```
-
-## Domain Model (quick peek)
-- **Account**: `Guid`, `UserId`, `Name` (max 120), `Currency` (3-letter), soft-archivable.
-- **Category**: per-user, `Type` = Expense/Income, optional parent (hierarchy).
-- **Transaction**: Expense/Income, `Amount > 0`, 3-letter `Currency` must match the account, optional `CategoryId`, `OccurredAtUtc`, optional `Note` (<=500).
-
 ## API Endpoints
 
 ### Accounts (auth required)
@@ -61,7 +55,7 @@ Content-Type: application/json
 ### Categories (auth required)
 - `GET /api/categories` → list non-archived (ordered by Type then Name)
 - `POST /api/categories`
-  ```json
+  ```jsonc
   { "name": "Groceries", "type": 0, "parentId": null } // 0=Expense, 1=Income
   ```
 
@@ -69,7 +63,7 @@ Content-Type: application/json
 - `GET /api/transactions?fromUtc=...&toUtc=...&type=...&accountId=...&categoryId=...&page=1&pageSize=20`
   - Sorted by `OccurredAtUtc` desc, then `CreatedAtUtc` desc; returns paged result
 - `POST /api/transactions`
-  ```json
+  ```jsonc
   {
     "accountId": "<guid>",
     "type": 0,                 // 0=Expense, 1=Income

@@ -2,6 +2,13 @@
 
 A clean, test-covered ASP.NET Core API for tracking personal finances. Create accounts, categorize expenses/income, and add transactions — all secured with JWT auth.
 
+## Tech stack
+- ASP.NET Core, EF Core, Identity, JWT Bearer
+- FluentValidation, ProblemDetails
+- Serilog (console + rolling files)
+- Swagger/OpenAPI
+- xUnit, FluentAssertions, Moq
+
 ## Features
 - **JWT auth**: register/login and fetch your profile (`/api/authentication/*`)
 - **Accounts**: list + create personal accounts in specific currencies
@@ -98,13 +105,6 @@ Content-Type: application/json
    ```bash
    dotnet test
    ```
-
-## Tech stack
-- ASP.NET Core, EF Core, Identity, JWT Bearer
-- FluentValidation, ProblemDetails
-- Serilog (console + rolling files)
-- Swagger/OpenAPI
-- xUnit, FluentAssertions, Moq
 
 ## Conventions & Behavior
 - Duplicate account names per user are rejected.
